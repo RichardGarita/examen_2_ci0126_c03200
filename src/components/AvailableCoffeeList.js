@@ -1,21 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import CoffeeTypeCard from './CoffeeTypeCard';
-import {
-    initializeCoffeeTypes,
-    initializeChangeCoins
-} from '../services/CoffeeMachineServices';
 
-function AvailableCoffeeScreen () {
-    const [coffeeTypes, setCoffeeTypes] = useState([]);
-    const [changeCoins, setChangeCoins] = useState([]);
-
-    useEffect(() => {
-        setCoffeeTypes(initializeCoffeeTypes());
-        setChangeCoins(initializeChangeCoins());
-    }, []); 
+function AvailableCoffeeScreen ({coffeeTypes}) {
 
     return (
-        <div className='card'>
+        <div className='card mb-3'>
             <div className="card-header">
                 <h2 className='text-center'>Productos Disponibles</h2>
             </div>
