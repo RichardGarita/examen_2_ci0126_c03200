@@ -1,0 +1,14 @@
+{
+    "coffeeTypes": [
+      { "name": "Café Americano", "quantity": 10, "price": 850 },
+      { "name": "Capuchino", "quantity": 8, "price": 950 },
+      { "name": "Latte", "quantity": 10, "price": 1150 },
+      { "name": "Mocachino", "quantity": 15, "price": 1300 }
+    ],
+    "changeCoins": [
+        {"denomination": "500", "quantity": 20},
+        {"denomination": "100", "quantity": 30},
+        {"denomination": "50", "quantity": 50},
+        {"denomination": "25", "quantity": 25}
+    ]
+  }
