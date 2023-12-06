@@ -29,7 +29,7 @@ export default function ({itemsList, purchaseItem}) {
     };
 
     return (
-        <form className="card col-5" onSubmit={handleSubmit}>
+        <form className="card col-4 me-1" onSubmit={handleSubmit}>
             <div className='form-floating col-11 mx-auto my-2'>
                 <select id="itemSelector" className="form-select"
                     onChange={handleItemChange} name="itemSelector"

@@ -8,11 +8,16 @@ class CoffeeMachineServices extends Component{
         this.state = {
             coffeeTypes: data.coffeeTypes,
             changeCoins: data.changeCoins,
+            allowedCurrency: data.allowedCurrency,
         };
     }
 
     getCoffeeTypes() {
         return this.state.coffeeTypes;
+    }
+
+    getAllowedCurrency() {
+        return this.state.allowedCurrency;
     }
 
     getChangeCoins() {

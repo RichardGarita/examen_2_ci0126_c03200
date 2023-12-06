@@ -6,9 +6,16 @@
       { "name": "Mocachino", "quantity": 15, "price": 1300 }
     ],
     "changeCoins": [
-        {"denomination": "500", "quantity": 20},
-        {"denomination": "100", "quantity": 30},
-        {"denomination": "50", "quantity": 50},
-        {"denomination": "25", "quantity": 25}
-    ]
+      {"denomination": 500, "quantity": 20},
+      {"denomination": 100, "quantity": 30},
+      {"denomination": 50, "quantity": 50},
+      {"denomination": 25, "quantity": 25}
+    ],
+    "allowedCurrency": [
+      {"denomination": 500, "type": "coin"},
+      {"denomination": 100, "type": "coin"},
+      {"denomination": 50, "type": "coin"},
+      {"denomination": 25, "type": "coin"},
+      {"denomination": 1000, "type": "bill"}
+  ]
   }

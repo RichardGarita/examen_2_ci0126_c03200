@@ -4,6 +4,7 @@ import AvailableCoffeeScreen from './components/AvailableCoffeeList';
 import PurchaseBox from './components/PurchaseBox';
 import CoffeeMachineServices from './services/CoffeeMachineServices';
 import ShoppingCart from './components/ShoppingCart';
+import PaymentBox from './components/PaymentBox';
 
 const coffeeMachineServices = new CoffeeMachineServices();
 
@@ -12,6 +13,9 @@ function App() {
   const [coffeeTypes, setCoffeeTypes] = useState([]);
   const [cartCoffees, setCartItems] = useState([]);
   const [changeCoins, setChangeCoins] = useState([]);
+  const [currentCredit, setCurrentCredit] = useState(0);
+
+  const allowedCurrency = coffeeMachineServices.getAllowedCurrency();
 
   useEffect(() => {
       setCoffeeTypes(coffeeMachineServices.getCoffeeTypes());
@@ -40,9 +44,10 @@ function App() {
     <div className='container'>
       <h1 className='text-center'>Máquina de café</h1>
       <AvailableCoffeeScreen coffeeTypes={coffeeTypes}/>
-      <div className='row'>
-        <ShoppingCart cartItems={cartCoffees}/>
+      <div className='row m-0'>
         <PurchaseBox itemsList={coffeeTypes} purchaseItem={addCoffeeToCart}/>
+        <ShoppingCart cartItems={cartCoffees}/>
+        <PaymentBox currentCredit={currentCredit} setCurrentCredit={setCurrentCredit} allowedCurrency={allowedCurrency}/>
       </div>
     </div>
   );

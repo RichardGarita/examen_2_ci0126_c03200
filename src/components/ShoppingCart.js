@@ -13,19 +13,19 @@ export default function ShoppingCart ({cartItems}) {
     }, [cartItems]);
 
     return (
-        <div className="card col-5 p-2">
-                <div className='card-title'>
-                    <h3 className='text-center m-0'>Carrito</h3>
-                </div>
-                {cartItems && cartItems.length > 0 ?
-                    cartItems.map(cartItem => (
-                        <div key={cartItem.name} >
-                            <p className='mb-1'>{cartItem.name} x{cartItem.quantity}</p>
-                        </div>
-                    ))
-                : <p> El carrito está vacío</p>}
+        <div className="card col-4 p-2">
+            <div className='card-title'>
+                <h3 className='text-center m-0'>Carrito</h3>
+            </div>
+            {cartItems && cartItems.length > 0 ?
+                cartItems.map(cartItem => (
+                    <div key={cartItem.name} >
+                        <p className='mb-1'>{cartItem.name} x{cartItem.quantity}</p>
+                    </div>
+                ))
+            : <p> El carrito está vacío</p>}
 
-                <p className='mt-auto mb-0 ms-auto'><strong>Precio total: {totalPrice} colones</strong></p>
+            <p className='mt-auto mb-0 ms-auto'><strong>Precio total: {totalPrice} colones</strong></p>
         </div>
     )
 }
