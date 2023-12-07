@@ -34,11 +34,11 @@ function PaymentBox ({currentCredit, setCurrentCredit, allowedCurrency, makePaym
             </div>
 
             <div ref={buttonRef} 
-            data-bs-toggle="modal" data-bs-target={`#exampleModal`}/>
+            data-bs-toggle="modal" data-bs-target={`#creditModal`}/>
             <Modal 
             title={"Ingresar crédito"}
             buttonRef={buttonRef}
-            id={'exampleModal'}
+            id={'creditModal'}
             content={modalContent(allowedCurrency, newCredit, setNewCredit)}
             button={<button className='btn btn-primary' onClick={addCredit}>Agregar</button>}/>
         </div>

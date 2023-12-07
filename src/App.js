@@ -14,6 +14,7 @@ function App() {
   const [coffeeTypes, setCoffeeTypes] = useState([]);
   const [cartCoffees, setCartItems] = useState([]);
   const [changeCoins, setChangeCoins] = useState([]);
+  const [thereIsChange, setThereIsChange] = useState(false);
   const [currentCredit, setCurrentCredit] = useState(0);
 
   const buttonRef = useRef();
@@ -24,7 +25,11 @@ function App() {
   useEffect(() => {
       setCoffeeTypes(coffeeMachineServices.getCoffeeTypes());
       setChangeCoins(coffeeMachineServices.getChangeCoins());
-  }, []); 
+  }, []);
+  
+  useEffect(() => {
+    setThereIsChange(!(changeCoins.every(coin => coin.quantity === 0)));
+  }, [changeCoins]); 
 
   const buyCoffees = () => {
     if (cartCoffees.length === 0) {
@@ -55,6 +60,7 @@ function App() {
       );
 
       setCoffeeTypes(coffeeMachineServices.getCoffeeTypes());
+      setChangeCoins(coffeeMachineServices.getChangeCoins());
       setCartItems([]);
       setCurrentCredit(0);
     }
@@ -78,20 +84,27 @@ function App() {
   return (
     <div className='container'>
       <h1 className='text-center'>Máquina de café</h1>
-      <AvailableCoffeeScreen coffeeTypes={coffeeTypes}/>
-      <div className='row m-0'>
-        <PurchaseBox itemsList={coffeeTypes} purchaseItem={addCoffeeToCart}/>
-        <ShoppingCart cartItems={cartCoffees}/>
-        <PaymentBox currentCredit={currentCredit} setCurrentCredit={setCurrentCredit} allowedCurrency={allowedCurrency} makePayment={buyCoffees}/>
-      </div>
-
       <div ref={buttonRef} 
         data-bs-toggle="modal" data-bs-target={`#notificationModal`}/>
         <Modal 
-        title={"Compra"}
-        buttonRef={buttonRef}
-        id={'notificationModal'}
-        content={modalContent}/>
+            title={"Compra"}
+            buttonRef={buttonRef}
+            id={'notificationModal'}
+            content={modalContent}/>
+      {thereIsChange
+        ? <>
+          <AvailableCoffeeScreen coffeeTypes={coffeeTypes}/>
+          <div className='row m-0'>
+            <PurchaseBox itemsList={coffeeTypes} purchaseItem={addCoffeeToCart}/>
+            <ShoppingCart cartItems={cartCoffees}/>
+            <PaymentBox currentCredit={currentCredit} setCurrentCredit={setCurrentCredit} allowedCurrency={allowedCurrency} makePayment={buyCoffees}/>
+          </div>
+        </>
+        : <div className='d-flex align-items-center justify-content-center vh-100'>
+          <h1 className='text-center'>Fuera de Servicio</h1>
+        </div>
+      }
+      
     </div>
   );
 }
