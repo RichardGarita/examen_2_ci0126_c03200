@@ -55,7 +55,7 @@ export default function ({itemsList, purchaseItem}) {
                 <label htmlFor="itemQuantity"> Cantidad </label>
             </div>
 
-            <button type='submit' className='btn btn-primary col-4 mb-2 ms-auto me-4'>Comprar</button>
+            <button type='submit' className='btn btn-primary col-6 mb-2 ms-auto me-4'>Agregar al carrito</button>
         </form>
     )
 }

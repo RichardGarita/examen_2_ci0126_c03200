@@ -3,7 +3,7 @@ import React, { useState, useRef } from 'react';
 import Modal from './Modal';
 
 
-function PaymentBox ({currentCredit, setCurrentCredit, allowedCurrency}) {
+function PaymentBox ({currentCredit, setCurrentCredit, allowedCurrency, makePayment}) {
     const buttonRef = useRef();
     const [newCredit, setNewCredit] = useState(0);
 
@@ -27,6 +27,12 @@ function PaymentBox ({currentCredit, setCurrentCredit, allowedCurrency}) {
                 </button>
             </div>
 
+            <div className='text-center mt-auto'>
+                <button type="button" className="btn btn-primary col-10" onClick={() => makePayment()}>
+                    Completar pago
+                </button>
+            </div>
+
             <div ref={buttonRef} 
             data-bs-toggle="modal" data-bs-target={`#exampleModal`}/>
             <Modal 
@@ -40,8 +46,8 @@ function PaymentBox ({currentCredit, setCurrentCredit, allowedCurrency}) {
 };
 
 const modalContent = ( allowedCurrency, newCredit, setNewCredit ) => {
-    const allowedCoins = allowedCurrency?.filter(currency => currency.type === "coin");
-    const allowedBills = allowedCurrency?.filter(currency => currency.type === "bill");
+    const allowedCoins = allowedCurrency?.filter(currency => currency.type === "moneda");
+    const allowedBills = allowedCurrency?.filter(currency => currency.type === "billete");
 
     const handleCurrencyClick = (denomination) => {
         setNewCredit(prevCredit => prevCredit + denomination);
@@ -53,7 +59,7 @@ const modalContent = ( allowedCurrency, newCredit, setNewCredit ) => {
   
     return (
       <div>
-         <button className='btn btn-primary col-2 me-1' onClick={() => handleResetClick()}>Reiniciar</button>
+         <button className='btn btn-secondary col-3' onClick={() => handleResetClick()}>Reiniciar</button>
         <p className='mb-1 mt-1'><strong>Monedas: </strong></p>
         {allowedCoins ? allowedCoins.map(coin => (
           <button onClick={() => handleCurrencyClick(coin.denomination)} key={coin.denomination} className='btn btn-primary col-2 me-1'>{coin.denomination}</button>
