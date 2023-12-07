@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import data from '../data/data.json';
 import { ErrorMessages } from '../utils/ErrorMessages';
 
@@ -63,6 +63,7 @@ class CoffeeMachineServices extends Component{
             };
 
         // Update coffee inventory
+        this.reduceChangeCoins(change);
         const newCoffeeTypes = [...this.state.coffeeTypes];
 
         coffeeTypes.forEach(coffeeType => {

@@ -142,6 +142,13 @@ describe('CoffeeMachineServices', () => {
         // Mock data
         const coffeeTypes = [{ name: 'Capuchino', quantity: 2, price: 950 }];
         const credit = 2000;
+
+        const expectedRemainingChange = [
+          {denomination: 500, quantity: 20, type: "moneda"},
+          {denomination: 100, quantity: 29, type: "moneda"},
+          {denomination: 50, quantity: 50, type: "moneda"},
+          {denomination: 25, quantity: 25, type: "moneda"}
+        ]
     
         // Act
         const result = coffeeMachine.purchaseCoffees(coffeeTypes, credit);
@@ -157,6 +164,10 @@ describe('CoffeeMachineServices', () => {
             { name: "Latte", quantity: 10, price: 1150 },
             { name: "Mocachino", quantity: 15, price: 1300 }
         ]);
+
+        expect(coffeeMachine.getChangeCoins()).toEqual(expectedRemainingChange);
+
+        expect
       });
     
       it('should handle not enough money error', () => {
