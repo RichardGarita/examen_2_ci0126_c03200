@@ -25,8 +25,23 @@ class CoffeeMachineServices extends Component{
         return this.state.changeCoins;
     }
 
+    setChangeCoins(newChangeCoins) {
+        this.state.changeCoins = newChangeCoins;
+    }
+
     setCoffeeTypes(newCoffeeTypes) {
         this.state.coffeeTypes = newCoffeeTypes;
+    }
+
+    reduceChangeCoins(change) {
+        const newChangeCoins = this.state.changeCoins.map((coin) => {
+        const changedCoin = change.find((c) => c.denomination === coin.denomination);
+        return changedCoin
+            ? { ...coin, quantity: coin.quantity - changedCoin.quantity }
+            : coin;
+        });
+  
+      this.setChangeCoins(newChangeCoins);
     }
 
     purchaseCoffees(coffeeTypes, credit) {
@@ -40,7 +55,7 @@ class CoffeeMachineServices extends Component{
                 change: null
             };
 
-        const change = this.calculateChange(totalPrice, credit, this.getChangeCoins());
+        const change = this.calculateChange(totalPrice, credit);
         if (change === null)
             return {
                 error: ErrorMessages.INSUFFICIENT_CHANGE,
@@ -67,8 +82,9 @@ class CoffeeMachineServices extends Component{
         };
     }
 
-    calculateChange(totalPrice, payment, changeCoins) {
+    calculateChange(totalPrice, payment) {
         let remainingChange = payment - totalPrice;
+        const changeCoins = this.getChangeCoins();
         const change = [];
     
         for (const coin of changeCoins) {
